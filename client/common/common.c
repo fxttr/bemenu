@@ -194,6 +194,7 @@ usage(FILE *out, const char *name)
           " --single-instance     force a single menu instance.\n"
           " --fork                always fork. (bemenu-run)\n"
           " --no-exec             do not execute command. (bemenu-run)\n"
+          " --nix                 use nixpkgs instead of path\n"
           " --auto-select         when one entry is left, automatically select it\n\n"
 
           "Use BEMENU_BACKEND env variable to force backend:\n"
@@ -291,6 +292,7 @@ do_getopt(struct client *client, int *argc, char **argv[])
         { "single-instance",no_argument,     0, 0x11c},
         { "fork",         no_argument,       0, 0x118 },
         { "no-exec",      no_argument,       0, 0x119 },
+        { "nix",          no_argument,       0, 0x129 },
         { "bottom",       no_argument,       0, 'b' },
         { "grab",         no_argument,       0, 'f' },
         { "no-overlap",   no_argument,       0, 'n' },
@@ -410,6 +412,9 @@ do_getopt(struct client *client, int *argc, char **argv[])
                 break;
             case 0x119:
                 client->no_exec = true;
+                break;
+            case 0x129:
+                client->nix = true;
                 break;
             case 'x':
                 client->password = (!strcmp(optarg, "none") ? BM_PASSWORD_NONE : (!strcmp(optarg, "hide") ? BM_PASSWORD_HIDE : (!strcmp(optarg, "indicator") ? BM_PASSWORD_INDICATOR : BM_PASSWORD_NONE)));

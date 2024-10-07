@@ -117,6 +117,13 @@ read_items_to_menu_from_dir(struct bm_menu *menu, const char *path)
 }
 
 static void
+read_items_to_menu_from_nixpkgs(struct bm_menu *menu)
+{
+    assert(menu);
+    
+}
+
+static void
 read_items_to_menu_from_path(struct bm_menu *menu)
 {
     assert(menu);
@@ -155,6 +162,9 @@ launch(const struct client *client, const char *bin)
         if (!(tokens = tokenize_quoted_to_argv(bin, NULL, NULL)))
             _exit(EXIT_FAILURE);
 
+        for(int i = 0; i < 5; ++i) {
+            printf("%s", tokens[i]);
+        }
         execvp(tokens[0], tokens);
         _exit(EXIT_SUCCESS);
     }
